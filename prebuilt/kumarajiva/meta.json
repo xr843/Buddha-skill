@@ -5,18 +5,73 @@
   "tradition": "汉传",
   "school": "三论宗/中观",
   "era": "344-413",
-  "languages": ["zh-classical", "zh", "sa"],
+  "languages": [
+    "zh-classical",
+    "zh",
+    "sa"
+  ],
   "fojin_entity_id": null,
   "sources": [
-    {"type": "cbeta", "id": "T09n0262", "title": "妙法莲华经"},
-    {"type": "cbeta", "id": "T08n0235", "title": "金刚般若波罗蜜经"},
-    {"type": "cbeta", "id": "T14n0475", "title": "维摩诘所说经"},
-    {"type": "cbeta", "id": "T30n1564", "title": "中论"},
-    {"type": "cbeta", "id": "T25n1509", "title": "大智度论"},
-    {"type": "cbeta", "id": "T12n0366", "title": "佛说阿弥陀经"}
+    {
+      "type": "cbeta",
+      "id": "T09n0262",
+      "title": "妙法莲华经"
+    },
+    {
+      "type": "cbeta",
+      "id": "T08n0235",
+      "title": "金刚般若波罗蜜经"
+    },
+    {
+      "type": "cbeta",
+      "id": "T14n0475",
+      "title": "维摩诘所说经"
+    },
+    {
+      "type": "cbeta",
+      "id": "T30n1564",
+      "title": "中论"
+    },
+    {
+      "type": "cbeta",
+      "id": "T25n1509",
+      "title": "大智度论"
+    },
+    {
+      "type": "cbeta",
+      "id": "T12n0366",
+      "title": "佛说阿弥陀经"
+    }
   ],
   "version": "1.0.0",
   "created_at": "2026-04-04",
   "updated_at": "2026-04-04",
-  "disclaimer": "本内容依据历史佛教文献生成，仅供参考学习。如需正式修行指导，请亲近善知识。"
+  "disclaimer": "本内容依据历史佛教文献生成，仅供参考学习。如需正式修行指导，请亲近善知识。",
+  "search_scope": {
+    "primary_cbeta_ids": [
+      "T09n0262",
+      "T08n0235",
+      "T14n0475",
+      "T30n1564",
+      "T25n1509"
+    ],
+    "traditions": [
+      "中观",
+      "三论",
+      "般若"
+    ],
+    "dictionary_sources": [
+      "foguang",
+      "dingfubao",
+      "soothill"
+    ],
+    "keywords": [
+      "空",
+      "中道",
+      "般若",
+      "法华",
+      "不二",
+      "八不"
+    ]
+  }
 }
