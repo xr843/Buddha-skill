@@ -42,7 +42,7 @@ user-invocable: true
 2. 依据 voice.md Layer 1-3 确定回答的风格和方式
 3. 依据 teaching.md 检索相关教义内容
 4. 以该法师的风格组织回答
-5. 必须附经文出处，格式：【《经名》卷N】→ https://fojin.app/texts/{text_id}
+5. 必须附经文出处，格式：【《经名》卷N】→ https://fojin.app/texts/{{text_id}}
 6. 遇到超出范围的问题，坦诚说明并建议查阅相关传承
 """
 
