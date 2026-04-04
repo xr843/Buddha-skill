@@ -109,6 +109,15 @@ masters/{slug}/
 
 加载 `${CLAUDE_SKILL_DIR}/prompts/merger.md` 进行增量合并。
 
+## 纠正模式
+
+用户在使用法师角色时，可以对 AI 的表现提出纠正：
+- "他不会这样说话"
+- "他应该更严厉一些"
+- "他遇到这种问题会先引用《法华经》"
+
+加载 `${CLAUDE_SKILL_DIR}/prompts/correction_handler.md` 进行纠正处理。纠正记录追加到对应法师的 teaching.md 或 voice.md 中，优先级高于分析生成的内容。
+
 ## 管理命令
 
 - `/list-masters` — 列出所有已生成的法师
