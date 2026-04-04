@@ -70,6 +70,8 @@ python3 ${CLAUDE_SKILL_DIR}/tools/sutra_collector.py --name "<法师名>" --trad
 
 ### Step 3：分析与生成
 
+**运行时检索规则**：加载 `${CLAUDE_SKILL_DIR}/prompts/rag_instructions.md`，将其中的检索指引嵌入生成的每个法师 SKILL.md 的运行规则中，确保法师回答时调用 FoJin 实时检索而非仅依赖 LLM 自身知识。
+
 **教义分析**：加载 `${CLAUDE_SKILL_DIR}/prompts/sutra_analyzer.md`，填入采集数据，分析教义结构。
 
 **风格分析**：加载 `${CLAUDE_SKILL_DIR}/prompts/voice_analyzer.md`，填入采集数据，分析说法风格。
@@ -118,6 +120,7 @@ teachers/{slug}/
 | 任务 | 工具 |
 |------|------|
 | FoJin 数据查询 | `${CLAUDE_SKILL_DIR}/tools/fojin_bridge.py` |
+| FoJin 实时检索 | `${CLAUDE_SKILL_DIR}/tools/rag_query.py` |
 | 经文采集 | `${CLAUDE_SKILL_DIR}/tools/sutra_collector.py` |
 | 角色生成 | `${CLAUDE_SKILL_DIR}/tools/teacher_builder.py` |
 | 文件写入 | `${CLAUDE_SKILL_DIR}/tools/skill_writer.py` |
