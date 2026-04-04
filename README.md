@@ -241,8 +241,8 @@ MIT License
 
 ## 致谢
 
-- [FoJin](https://fojin.app) — 提供核心数据支撑
-- [colleague-skill](https://github.com/xr843/colleague-skill) — AgentSkills 架构设计启发
+感谢以下开源佛教文献项目：
+
 - [CBETA](https://cbeta.org) — 汉文大藏经数字化
 - [SuttaCentral](https://suttacentral.net) — 巴利藏及多语种译本
 - [84000](https://84000.co) — 藏经英译项目

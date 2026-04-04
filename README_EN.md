@@ -243,8 +243,8 @@ MIT License
 
 ## Acknowledgments
 
-- [FoJin](https://fojin.app) — core data infrastructure
-- [colleague-skill](https://github.com/titanwings/colleague-skill) — AgentSkills architecture inspiration
+Gratitude to the following open-source Buddhist text projects:
+
 - [CBETA](https://cbeta.org) — digitized Chinese Buddhist Canon
 - [SuttaCentral](https://suttacentral.net) — Pali Canon and multilingual translations
 - [84000](https://84000.co) — Tibetan Buddhist translation project
