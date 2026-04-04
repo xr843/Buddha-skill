@@ -32,14 +32,14 @@ git clone https://github.com/xr843/Buddha-skill ~/Buddha-skill
 cd ~/Buddha-skill && pip install -r requirements.txt
 # 注册 skills（符号链接到 ~/.claude/skills/）
 for d in prebuilt/*/; do ln -sf "$(pwd)/$d" ~/.claude/skills/"$(basename $d)"; done
-ln -sf "$(pwd)" ~/.claude/skills/create-teacher
+ln -sf "$(pwd)" ~/.claude/skills/create-master
 ```
 
 **OpenClaw**
 
 ```bash
-git clone https://github.com/xr843/Buddha-skill ~/.openclaw/workspace/skills/create-teacher
-cd ~/.openclaw/workspace/skills/create-teacher && pip install -r requirements.txt
+git clone https://github.com/xr843/Buddha-skill ~/.openclaw/workspace/skills/create-master
+cd ~/.openclaw/workspace/skills/create-master && pip install -r requirements.txt
 ```
 
 **手动安装**
@@ -74,13 +74,13 @@ cd Buddha-skill && pip install -r requirements.txt
 ### 自定义生成
 
 ```
-/create-teacher 虚云老和尚
+/create-master 弘一大师
 ```
 
 或自然语言触发：
 
 ```
-帮我创建一个虚云老和尚的教学角色
+帮我创建一个弘一大师的教学角色
 ```
 
 系统将引导完成三步信息录入，然后自动从 FoJin 采集数据、生成教义分析与风格文件。
@@ -181,12 +181,12 @@ SKILL.md (AgentSkills 入口)
           ├─ prompts/teaching_builder.md
           ├─ prompts/voice_builder.md
           │
-          ├─ tools/teacher_builder.py   (角色构建)
+          ├─ tools/master_builder.py    (角色构建)
           ├─ tools/skill_writer.py      (文件写入)
           └─ tools/version_manager.py  (版本管理)
                 │
                 ▼
-          teachers/{slug}/
+          masters/{slug}/
               ├── SKILL.md
               ├── teaching.md
               ├── voice.md

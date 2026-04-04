@@ -1,83 +1,153 @@
 # Buddha-skill
 
-An AgentSkills-standard generator for AI teaching personas based on historical Buddhist masters, powered by [FoJin](https://fojin.app) — a Buddhist text aggregation platform.
+An AgentSkills-standard generator for AI personas based on historical Buddhist masters, powered by [FoJin](https://fojin.app) — a Buddhist text aggregation platform.
 
 ---
 
 ## Seriousness Statement
 
-This project is built out of respect for Buddhist traditions. All persona content is generated faithfully from historical documents. It makes no doctrinal judgments and claims no sectarian authority. Generated content is intended for study and reference only. For formal practice guidance, please seek out a qualified teacher and rely on genuine, living instruction.
-
-This project does not simulate any living religious leader.
+This project is built out of respect for Buddhist traditions. All content is generated faithfully from historical documents. It makes no doctrinal judgments and claims no sectarian authority. Generated content is intended for study and reference only. For formal practice guidance, please seek out a qualified master and rely on genuine, living instruction.
 
 ---
 
 ## Features
 
-- **Three pre-built teachers**: Theravada (Ajahn Chah), Chinese (Master Yinguang), Tibetan (Tsongkhapa) — ready to use out of the box
+- **10 pre-built masters**: 8 Chinese Buddhist masters across Yogacara, Madhyamaka, Chan, Tiantai, Huayan, Pure Land, and cross-tradition; 1 Theravada; 1 Tibetan — ready to use out of the box
 - **FoJin data bridge**: Connected to [fojin.app](https://fojin.app) with 503 data sources, 10K+ texts, 678K+ semantic embeddings, and a 31K-entity knowledge graph
+- **Runtime RAG retrieval**: Answers grounded in real Buddhist texts via FoJin semantic search, not just LLM training data
 - **AgentSkills standard**: Compliant with the AgentSkills specification; can be invoked as a sub-skill by other agents
-- **Dual-mode output**: Each teacher generates both `teaching.md` (doctrinal system) and `voice.md` (teaching style)
-- **Incremental evolution**: Existing teachers can be enhanced by appending new source texts via incremental merging
+- **Dual-mode output**: Each master generates both `teaching.md` (doctrinal system) and `voice.md` (teaching style)
+- **Incremental evolution**: Existing masters can be enhanced by appending new source texts via incremental merging
 - **Version management**: Built-in versioning with timestamps, supporting rollback to any prior version
 
 ---
 
 ## Quick Start
 
-### Install Dependencies
+### Installation
+
+**Claude Code**
 
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/xr843/Buddha-skill ~/Buddha-skill
+cd ~/Buddha-skill && pip install -r requirements.txt
+# Register skills (symlink to ~/.claude/skills/)
+for d in prebuilt/*/; do ln -sf "$(pwd)/$d" ~/.claude/skills/"$(basename $d)"; done
+ln -sf "$(pwd)" ~/.claude/skills/create-master
 ```
 
-### Use a Pre-built Teacher
+**OpenClaw**
 
-In any AgentSkills-compatible environment:
-
-```
-/ajahn-chah     — Ajahn Chah (Theravada · Thai Forest Tradition)
-/yinguang       — Master Yinguang (Chinese Buddhism · Pure Land)
-/tsongkhapa     — Tsongkhapa (Tibetan · Gelug School)
+```bash
+git clone https://github.com/xr843/Buddha-skill ~/.openclaw/workspace/skills/create-master
+cd ~/.openclaw/workspace/skills/create-master && pip install -r requirements.txt
 ```
 
-### Generate a Custom Teacher
+**Manual**
+
+```bash
+git clone https://github.com/xr843/Buddha-skill
+cd Buddha-skill && pip install -r requirements.txt
+```
+
+### Use a Pre-built Master
+
+In any AgentSkills-compatible environment (Claude Code / OpenClaw):
 
 ```
-/create-teacher Xunyun
+# Chinese Buddhism
+/xuanzang       — Master Xuanzang (Yogacara)
+/kumarajiva     — Kumarajiva (Madhyamaka / Sanlun)
+/huineng        — Master Huineng (Chan, Sixth Patriarch)
+/zhiyi          — Master Zhiyi (Tiantai)
+/fazang         — Master Fazang (Huayan)
+/yinguang       — Master Yinguang (Pure Land)
+/ouyi           — Master Ouyi (Tiantai / Pure Land, cross-tradition)
+/xuyun          — Master Xuyun (Chan, Five Houses)
+
+# Theravada
+/ajahn-chah     — Ajahn Chah (Thai Forest Tradition)
+
+# Tibetan
+/tsongkhapa     — Tsongkhapa (Gelug)
+```
+
+### Generate a Custom Master
+
+```
+/create-master Hongyi
 ```
 
 Or use natural language:
 
 ```
-Create a teaching persona for Master Xunyun
+Create a persona for Master Hongyi
 ```
 
 The system will guide you through a three-step intake, then automatically collect data from FoJin and generate the doctrinal analysis and style files.
 
 ---
 
-## Pre-built Teachers
+## Pre-built Masters
 
-### Ajahn Chah (1918-1992)
+### Master Xuanzang (602-664)
 
-A Thai Forest Tradition monk and one of the most influential Theravada teachers of the 20th century.
-Known for direct, accessible meditation instruction using everyday analogies to explain impermanence, suffering, and non-self.
-Primary sources: SuttaCentral Pali Canon, including Mahāsatipaṭṭhāna Sutta, Dhammacakkappavattana Sutta, and related core texts.
-Invoke: `/ajahn-chah`
+The greatest translator in Chinese Buddhist history. Traveled to India for 17 years, translated 75 texts in 1,335 fascicles. Founded the Yogacara (Faxiang) school in China. Known for precise, rigorous translation methodology and the "Five Categories of Non-Translation" principle.
+Primary sources: CBETA — Mahaprajnaparamita Sutra, Yogacarabhumi-sastra, Cheng Weishi Lun, Heart Sutra.
+Invoke: `/xuanzang`
+
+### Kumarajiva (344-413)
+
+One of the four great translators of Chinese Buddhism. Born in Kucha, translated in Chang'an. His translations are celebrated for literary elegance — the Lotus Sutra, Diamond Sutra, Vimalakirti Sutra, and Mulamadhyamakakarika remain the most widely used versions today. Established the foundation of the Sanlun (Madhyamaka) school in China.
+Primary sources: CBETA — Lotus Sutra, Diamond Sutra, Vimalakirti Sutra, Mulamadhyamakakarika, Mahaprajnaparamita-sastra.
+Invoke: `/kumarajiva`
+
+### Master Huineng (638-713)
+
+The Sixth Patriarch of Chan Buddhism, founder of the Southern School. An illiterate woodcutter who attained enlightenment upon hearing the Diamond Sutra. His Platform Sutra is the only Chinese-authored text honored with the title "sutra." Advocated "directly pointing to the mind, seeing one's nature to become Buddha."
+Primary sources: CBETA — Platform Sutra (T48n2008).
+Invoke: `/huineng`
+
+### Master Zhiyi (538-597)
+
+Founder of the Tiantai school, honored as "the Little Shakyamuni of the East." Established the first comprehensive doctrinal classification system in Chinese Buddhism (Five Periods, Eight Teachings). Authored the Three Great Works of Tiantai. Core teachings: three thousand realms in a single thought-moment, perfect interfusion of the three truths, dual cultivation of samatha and vipasyana.
+Primary sources: CBETA — Mohe Zhiguan (T46n1911), Fahua Xuanyi (T33n1718).
+Invoke: `/zhiyi`
+
+### Master Fazang (643-712)
+
+Third Patriarch and true systematizer of the Huayan school. National Preceptor under Empress Wu Zetian. Used the Golden Lion treatise to explain Huayan philosophy. Core teachings: dharmadhatu dependent origination, four dharma-realms, ten mysterious gates, six characteristics in perfect harmony.
+Primary sources: CBETA — Huayan Jing Tanxuan Ji (T35n1733), Huayan Wujiao Zhang (T45n1866).
+Invoke: `/fazang`
 
 ### Master Yinguang (1861-1940)
 
-The 13th Patriarch of the Chinese Pure Land school and a central figure in its modern revival.
-His writing is sincere and straightforward; he guided countless practitioners through correspondence, collected in the three volumes of the Yinguang Fashi Wenchao.
-Primary sources: CBETA Chinese Buddhist Canon, including the Wenchao volumes and the three Pure Land sutras.
+13th Patriarch of the Chinese Pure Land school. Central figure in the modern Pure Land revival. His writing is sincere and straightforward; he guided countless practitioners through correspondence, collected in the three volumes of the Yinguang Fashi Wenchao.
+Primary sources: CBETA — Wenchao volumes and the three Pure Land sutras.
 Invoke: `/yinguang`
 
-### Tsongkhapa (ཙོང་ཁ་པ, 1357-1419)
+### Master Ouyi (1599-1655)
 
-Founder of the Gelug school of Tibetan Buddhism and one of the most systematically rigorous commentators in Buddhist history.
-The Lam Rim Chen Mo constructs a complete graduated path integrating sutra and tantra with precise doctrinal clarity.
-Primary sources: Lam Rim Chen Mo, sNgags Rim Chen Mo, Lam gTso rNam gSum, and related works.
+One of the Four Great Masters of Late Ming Buddhism, 9th Patriarch of Pure Land. His motto: "Doctrine follows Tiantai, practice returns to Pure Land." The most important cross-tradition synthesizer in Chinese Buddhist history. His commentary on the Amitabha Sutra was praised by Master Yinguang as unsurpassable.
+Primary sources: CBETA — Amituo Jing Yaojie (T37n1762), Jiaoguan Gangzong.
+Invoke: `/ouyi`
+
+### Master Xuyun (1840-1959)
+
+Modern Chan patriarch who lived to 119 years. Unprecedented in Buddhist history for holding dharma transmission in all five houses of Chan (Linji, Caodong, Guiyang, Yunmen, Fayan). Restored six major ancestral monasteries. Advocated hua-tou investigation, honest practice, and harmonizing Chan with Pure Land.
+Primary sources: CBETA — Shurangama Sutra, Diamond Sutra, Platform Sutra.
+Invoke: `/xuyun`
+
+### Ajahn Chah (1918-1992)
+
+A Thai Forest Tradition monk and one of the most influential Theravada masters of the 20th century. Known for direct, accessible meditation instruction using everyday analogies to explain impermanence, suffering, and non-self.
+Primary sources: SuttaCentral Pali Canon — Mahasatipatthana Sutta, Dhammacakkappavattana Sutta.
+Invoke: `/ajahn-chah`
+
+### Tsongkhapa (1357-1419)
+
+Founder of the Gelug school of Tibetan Buddhism. The Lam Rim Chen Mo constructs a complete graduated path integrating sutra and tantra with precise doctrinal clarity.
+Primary sources: Lam Rim Chen Mo, sNgags Rim Chen Mo, Lam gTso rNam gSum.
 Invoke: `/tsongkhapa`
 
 ---
@@ -86,39 +156,39 @@ Invoke: `/tsongkhapa`
 
 ```
 User request
-    │
-    ▼
+    |
+    v
 SKILL.md (AgentSkills entry point)
-    │
-    ├─ Pre-built teachers ────────────► prebuilt/{slug}/
-    │                                        ├── SKILL.md
-    │                                        ├── teaching.md
-    │                                        ├── voice.md
-    │                                        └── meta.json
-    │
-    └─ Custom generation
-          │
-          ├─ prompts/intake.md          (information intake)
-          │
-          ├─ tools/sutra_collector.py
-          │       │
-          │       └──► FoJin API ───► knowledge graph + semantic search + text
-          │
-          ├─ prompts/sutra_analyzer.md  (doctrinal analysis)
-          ├─ prompts/voice_analyzer.md  (style analysis)
-          ├─ prompts/teaching_builder.md
-          ├─ prompts/voice_builder.md
-          │
-          ├─ tools/teacher_builder.py   (persona construction)
-          ├─ tools/skill_writer.py      (file writing)
-          └─ tools/version_manager.py  (version management)
-                │
-                ▼
-          teachers/{slug}/
-              ├── SKILL.md
-              ├── teaching.md
-              ├── voice.md
-              └── meta.json
+    |
+    +-- Pre-built masters ----------------> prebuilt/{slug}/
+    |                                        +-- SKILL.md
+    |                                        +-- teaching.md
+    |                                        +-- voice.md
+    |                                        +-- meta.json
+    |
+    +-- Custom generation
+          |
+          +-- prompts/intake.md          (information intake)
+          |
+          +-- tools/sutra_collector.py
+          |       |
+          |       +--> FoJin API ---> knowledge graph + semantic search + text
+          |
+          +-- prompts/sutra_analyzer.md  (doctrinal analysis)
+          +-- prompts/voice_analyzer.md  (style analysis)
+          +-- prompts/teaching_builder.md
+          +-- prompts/voice_builder.md
+          |
+          +-- tools/master_builder.py    (persona construction)
+          +-- tools/skill_writer.py      (file writing)
+          +-- tools/version_manager.py   (version management)
+                |
+                v
+          masters/{slug}/
+              +-- SKILL.md
+              +-- teaching.md
+              +-- voice.md
+              +-- meta.json
 ```
 
 ---
@@ -129,8 +199,9 @@ SKILL.md (AgentSkills entry point)
 
 Buddha-skill connects to the FoJin API via `tools/fojin_bridge.py` to enable:
 
-- Knowledge graph entity retrieval (teacher biography, lineage, school)
+- Knowledge graph entity retrieval (master biography, lineage, school)
 - Semantic similarity search (doctrinally relevant sutras)
+- Runtime RAG retrieval for grounding answers in real texts
 - Source passage extraction with provenance tracking
 
 All citations include traceable FoJin links to ensure transparency of sources.
@@ -139,27 +210,26 @@ All citations include traceable FoJin links to ensure transparency of sources.
 
 ## Sensitivity Boundaries
 
-**What this project explicitly does not do:**
+**Will not:**
 
-- Simulate any living religious leader
 - Pass judgment on the relative merits of different schools or traditions
 - Provide personal practice diagnoses (karma readings, past lives, etc.)
-- Claim or simulate supernatural powers or auspicious experiences
+- Claim supernatural powers or auspicious experiences
 - Engage with politically charged religious topics
-- Offer medical advice of any kind
+- Offer medical advice
 
-**What this project explicitly does:**
+**Will:**
 
-- Quote source texts faithfully without distortion or embellishment
-- Attach traceable citations (FoJin links) to every response
-- Acknowledge clearly when a question falls outside the project's scope
-- Encourage users to seek out qualified teachers and authentic practice
+- Cite source texts faithfully, with FoJin links on every response
+- Retrieve real texts via runtime RAG, not relying solely on AI training data
+- Acknowledge clearly when a question falls outside scope
+- Encourage users to seek out qualified masters and authentic practice
 
 ---
 
 ## Contributing
 
-Contributions are welcome: new pre-built teachers (follow the format in `prebuilt/`), corrections to source attributions, or improvements to the toolchain.
+Contributions are welcome: new pre-built masters (follow the format in `prebuilt/`), corrections to source attributions, or improvements to the toolchain.
 
 Before submitting, please verify: sources are traceable, content is faithful to historical documents, and no sectarian bias is introduced.
 
@@ -174,7 +244,7 @@ MIT License
 ## Acknowledgments
 
 - [FoJin](https://fojin.app) — core data infrastructure
-- [colleague-skill](https://github.com/xr843/colleague-skill) — AgentSkills architecture inspiration
+- [colleague-skill](https://github.com/titanwings/colleague-skill) — AgentSkills architecture inspiration
 - [CBETA](https://cbeta.org) — digitized Chinese Buddhist Canon
 - [SuttaCentral](https://suttacentral.net) — Pali Canon and multilingual translations
 - [84000](https://84000.co) — Tibetan Buddhist translation project

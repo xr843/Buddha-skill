@@ -1,5 +1,5 @@
 ---
-name: create-teacher
+name: create-master
 description: 基于佛教经典文献，生成特定高僧大德的 AI 教学角色
 argument-hint: <法师名称>
 version: 1.0.0
@@ -21,7 +21,7 @@ allowed-tools:
 ## 触发条件
 
 以下方式均可触发：
-- `/create-teacher` 或 `/create-teacher <法师名>`
+- `/create-master` 或 `/create-master <法师名>`
 - "帮我创建一个印光大师的教学角色"
 - "生成阿姜查的 AI Skill"
 - "我想和宗喀巴大师学习"
@@ -89,12 +89,12 @@ python3 ${CLAUDE_SKILL_DIR}/tools/sutra_collector.py --name "<法师名>" --trad
 使用 `${CLAUDE_SKILL_DIR}/tools/skill_writer.py` 写入文件：
 
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/tools/teacher_builder.py --name "<法师名>" --output teachers/
+python3 ${CLAUDE_SKILL_DIR}/tools/master_builder.py --name "<法师名>" --output masters/
 ```
 
 生成目录结构：
 ```
-teachers/{slug}/
+masters/{slug}/
 ├── SKILL.md          # /{slug} 触发
 ├── teaching.md       # 教义体系
 ├── voice.md          # 说法风格
@@ -111,9 +111,9 @@ teachers/{slug}/
 
 ## 管理命令
 
-- `/list-teachers` — 列出所有已生成的法师
-- `/teacher-rollback <slug> <version>` — 回滚到指定版本
-- `/delete-teacher <slug>` — 删除一个法师
+- `/list-masters` — 列出所有已生成的法师
+- `/master-rollback <slug> <version>` — 回滚到指定版本
+- `/delete-master <slug>` — 删除一个法师
 
 ## 工具路由
 
@@ -122,7 +122,7 @@ teachers/{slug}/
 | FoJin 数据查询 | `${CLAUDE_SKILL_DIR}/tools/fojin_bridge.py` |
 | FoJin 实时检索 | `${CLAUDE_SKILL_DIR}/tools/rag_query.py` |
 | 经文采集 | `${CLAUDE_SKILL_DIR}/tools/sutra_collector.py` |
-| 角色生成 | `${CLAUDE_SKILL_DIR}/tools/teacher_builder.py` |
+| 角色生成 | `${CLAUDE_SKILL_DIR}/tools/master_builder.py` |
 | 文件写入 | `${CLAUDE_SKILL_DIR}/tools/skill_writer.py` |
 | 版本管理 | `${CLAUDE_SKILL_DIR}/tools/version_manager.py` |
 

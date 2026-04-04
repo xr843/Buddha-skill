@@ -355,7 +355,7 @@ teachers/{slug}/
 回滚命令：
 
 ```
-/teacher-rollback {slug} {version}
+/master-rollback {slug} {version}
 ```
 
 回滚操作不删除后续版本，而是创建一个新版本（内容为指定版本的副本），保持版本历史的完整性。
