@@ -27,15 +27,6 @@
 
 ### 安装
 
-**OpenClaw（推荐）**
-
-```bash
-git clone https://github.com/xr843/Buddha-skill ~/.openclaw/workspace/skills/create-teacher
-cd ~/.openclaw/workspace/skills/create-teacher && pip install -r requirements.txt
-```
-
-安装后即可使用 `/create-teacher` 和全部 10 位预置法师。
-
 **Claude Code**
 
 ```bash
@@ -44,6 +35,13 @@ cd ~/Buddha-skill && pip install -r requirements.txt
 # 注册 skills（符号链接到 ~/.claude/skills/）
 for d in prebuilt/*/; do ln -sf "$(pwd)/$d" ~/.claude/skills/"$(basename $d)"; done
 ln -sf "$(pwd)" ~/.claude/skills/create-teacher
+```
+
+**OpenClaw**
+
+```bash
+git clone https://github.com/xr843/Buddha-skill ~/.openclaw/workspace/skills/create-teacher
+cd ~/.openclaw/workspace/skills/create-teacher && pip install -r requirements.txt
 ```
 
 **手动安装**
