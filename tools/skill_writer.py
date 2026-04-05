@@ -55,7 +55,8 @@ def slugify(name: str) -> str:
         pinyin_list = lazy_pinyin(name, style=Style.NORMAL)
         slug = "-".join(pinyin_list)
     else:
-        slug = name.lower().replace(" ", "-")
+        slug = name
+    slug = slug.lower().replace(" ", "-")
     slug = "".join(c for c in slug if c.isalnum() or c == "-")
     slug = slug.strip("-")
     return slug
