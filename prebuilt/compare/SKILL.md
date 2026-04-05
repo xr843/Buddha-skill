@@ -8,6 +8,23 @@ user-invocable: true
 
 本内容依据佛教经典文献生成，仅供参考学习。
 
+## 路径约定
+
+本 skill 位于 `prebuilt/compare/`，项目根目录在上两级。本文中提到的工具和数据路径定位方式：
+
+```bash
+# 推荐：从 SKILL 路径回溯项目根
+SKILL_FILE="$(readlink -f "${CLAUDE_SKILL_DIR}/SKILL.md" 2>/dev/null)"
+PROJECT_ROOT="$(dirname "$(dirname "$(dirname "$SKILL_FILE")")")"
+
+# 降级方案（按顺序尝试）：
+# 1. $HOME/projects/buddha-skill       （开发环境）
+# 2. $HOME/Buddha-skill                 （手动 clone）
+# 3. $HOME/.openclaw/workspace/skills/create-master  （OpenClaw）
+```
+
+后续所有工具路径均以 `$PROJECT_ROOT` 为前缀。
+
 ## 触发方式
 
 - `/compare-masters` + 问题 + 可选的法师列表
@@ -29,7 +46,7 @@ user-invocable: true
 
 **优先级 2 — 基于关键词智能匹配（无用户指定时）**
 
-读取每位法师的 `${CLAUDE_SKILL_DIR}/prebuilt/{slug}/meta.json` 中的 `search_scope.keywords` 字段，执行以下匹配流程：
+读取每位法师的 `meta.json`（路径参考 Step 2 的项目根定位逻辑）中 `search_scope.keywords` 字段，执行以下匹配流程：
 
 1. **提取问题核心概念**：从用户问题中提取 2-4 个佛学关键词（术语、概念、法门）
 2. **与 8 位法师的 keywords 字段比对**：记录每位法师的匹配次数和匹配强度
@@ -65,14 +82,50 @@ user-invocable: true
 - ouyi（蕅益·跨宗派）
 - xuyun（虚云·禅宗五宗）
 
-**选择完成后**：告知用户选择了哪几位法师及选择原因（让用户知道可以用 `--masters` 覆盖）。
+**选择完成后**：输出选择理由，格式如下：
+
+```
+法师选择：
+- {master_A}：{"关键词强匹配：xxx, yyy" 或 "主题映射：xxx"}
+- {master_B}：{"关键词匹配：xxx" 或 "主题互补视角：xxx"}
+（可用 --masters xxx,yyy 手动覆盖）
+```
+
+**精准反馈示例**：
+- 用户问"什么是遍行因" → "xuanzang：强关键词匹配（遍行因、六因、因、唯识、种子），kumarajiva：主题互补（中观视角对比唯识六因）"
+- 用户问"念佛" → "yinguang：强关键词匹配（念佛、持名念佛、往生），ouyi：关键词匹配（念佛、持名念佛、信愿）"
+- 用户问"如何修行" → "按通用主题映射（修行次第 → ouyi + yinguang）"
 
 ### Step 2：对每位法师执行 RAG 检索
 
 对每位选定的法师：
-1. 加载其 `prebuilt/{slug}/teaching.md` 和 `voice.md`
-2. 调用 `python3 ${CLAUDE_SKILL_DIR}/tools/rag_query.py semantic "<问题>" --top_k 3`
-3. 根据该法师的 meta.json 中的 `search_scope.primary_cbeta_ids` 过滤检索结果
+
+1. **定位项目根目录**（`compare` 是 `prebuilt/compare/`，项目根在上两级）。按以下顺序尝试：
+   ```bash
+   # 方法 A：从 SKILL 目录回溯（symlink 解析）
+   SKILL_FILE="$(readlink -f "${CLAUDE_SKILL_DIR}/SKILL.md" 2>/dev/null || echo "")"
+   if [ -n "$SKILL_FILE" ]; then
+     PROJECT_ROOT="$(dirname "$(dirname "$(dirname "$SKILL_FILE")")")"
+   fi
+
+   # 方法 B：已知的开发路径
+   [ -z "$PROJECT_ROOT" ] && PROJECT_ROOT="$HOME/projects/buddha-skill"
+   [ ! -f "$PROJECT_ROOT/tools/rag_query.py" ] && PROJECT_ROOT="$HOME/Buddha-skill"
+
+   # 方法 C：OpenClaw 默认路径
+   [ ! -f "$PROJECT_ROOT/tools/rag_query.py" ] && PROJECT_ROOT="$HOME/.openclaw/workspace/skills/create-master"
+   ```
+
+2. **加载法师角色内容**：`$PROJECT_ROOT/prebuilt/{slug}/teaching.md` 和 `voice.md`
+
+3. **执行语义检索**：
+   ```bash
+   python3 "$PROJECT_ROOT/tools/rag_query.py" semantic "<问题>" --top_k 3
+   ```
+
+4. **过滤结果**：根据该法师 meta.json 的 `search_scope.primary_cbeta_ids` 过滤检索结果
+
+5. **降级处理**：若 `rag_query.py` 不可达（路径解析失败或 FoJin API 不可用），改用 teaching.md 中已验证的 FoJin 链接作为出处，并在回答开头提示"本次检索基于预置内容"
 
 ### Step 3：生成对比回答
 
