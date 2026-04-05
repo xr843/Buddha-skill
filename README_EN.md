@@ -276,4 +276,4 @@ Gratitude to the following open-source Buddhist text projects:
 
 ## Community
 
-- [LINUX DO](https://linux.do) — This project has been announced on the LINUX DO community. Feedback and monitoring welcome.
+- [LINUX DO](https://linux.do) — Thanks to the LINUX DO community for support and feedback

@@ -287,4 +287,4 @@ MIT License
 
 ## Community
 
-- [LINUX DO](https://linux.do) — 本项目已在 LINUX DO 社区开源推广，欢迎佬友监督与反馈
+- [LINUX DO](https://linux.do) — 感谢 LINUX DO 社区的支持与反馈
