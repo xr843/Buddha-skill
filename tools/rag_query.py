@@ -90,7 +90,7 @@ def format_semantic_results(data: dict, brief: bool = False) -> str:
 
             link = f"https://fojin.app/texts/{text_id}" if text_id else ""
             if text_id and juan:
-                link += f"/juan/{juan}"
+                link = f"https://fojin.app/texts/{text_id}/read?juan={juan}"
 
             score_str = f" (score={score:.2f})" if isinstance(score, (int, float)) else ""
             snippet = str(content).strip().replace("\n", " ")[:80]
@@ -116,9 +116,10 @@ def format_semantic_results(data: dict, brief: bool = False) -> str:
         if score:
             lines.append(f"相似度: {score}")
         if text_id:
-            link = f"https://fojin.app/texts/{text_id}"
             if juan:
-                link += f"/juan/{juan}"
+                link = f"https://fojin.app/texts/{text_id}/read?juan={juan}"
+            else:
+                link = f"https://fojin.app/texts/{text_id}"
             lines.append(f"FoJin链接: {link}")
         if content:
             content_str = str(content)
