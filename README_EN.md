@@ -271,3 +271,9 @@ Gratitude to the following open-source Buddhist text projects:
 - [CBETA](https://cbeta.org) — digitized Chinese Buddhist Canon
 - [SuttaCentral](https://suttacentral.net) — Pali Canon and multilingual translations
 - [84000](https://84000.co) — Tibetan Buddhist translation project
+
+---
+
+## Community
+
+- [LINUX DO](https://linux.do) — This project has been announced on the LINUX DO community. Feedback and monitoring welcome.

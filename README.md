@@ -282,3 +282,9 @@ MIT License
 - [CBETA](https://cbeta.org) — 汉文大藏经数字化
 - [SuttaCentral](https://suttacentral.net) — 巴利藏及多语种译本
 - [84000](https://84000.co) — 藏经英译项目
+
+---
+
+## Community
+
+- [LINUX DO](https://linux.do) — 本项目已在 LINUX DO 社区开源推广，欢迎佬友监督与反馈
