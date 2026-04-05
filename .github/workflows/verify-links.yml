@@ -1,0 +1,56 @@
+name: Verify FoJin Links
+
+on:
+  schedule:
+    # Run every Monday at 03:00 UTC
+    - cron: '0 3 * * 1'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pypinyin pyyaml
+
+      - name: Run verify_sources.py (dry run)
+        id: verify
+        run: |
+          cd ${{ github.workspace }}
+          python3 tools/verify_sources.py 2>&1 | tee verify_output.txt
+          # Extract key stats for the issue body
+          FAILED=$(grep -oP "Not found in FoJin:\s*\K\d+" verify_output.txt || echo "0")
+          UPDATES=$(grep -oP "URL replacements:\s*\K\d+" verify_output.txt || echo "0")
+          echo "failed=$FAILED" >> $GITHUB_OUTPUT
+          echo "updates=$UPDATES" >> $GITHUB_OUTPUT
+
+      - name: Create issue if links need updating
+        if: steps.verify.outputs.updates != '0' || steps.verify.outputs.failed != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('verify_output.txt', 'utf8');
+            const failed = '${{ steps.verify.outputs.failed }}';
+            const updates = '${{ steps.verify.outputs.updates }}';
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.name,
+              title: `[Weekly] FoJin links need update — ${updates} URLs, ${failed} missing`,
+              body: `Automated weekly link verification found changes.\n\n` +
+                    `- **URL replacements needed:** ${updates}\n` +
+                    `- **CBETA IDs not found in FoJin:** ${failed}\n\n` +
+                    `## Full output\n\n\`\`\`\n${output}\n\`\`\`\n\n` +
+                    `Run \`python3 tools/verify_sources.py --fix\` locally and commit the changes.`,
+              labels: ['maintenance', 'automated']
+            });
