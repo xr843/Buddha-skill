@@ -1,4 +1,4 @@
-# Buddha-skill
+# Master-skill
 
 An AgentSkills-standard generator for AI personas based on historical Buddhist masters, powered by [FoJin](https://fojin.app) — a Buddhist text aggregation platform.
 
@@ -29,8 +29,8 @@ This project is built out of respect for Buddhist traditions. All content is gen
 **Claude Code**
 
 ```bash
-git clone https://github.com/xr843/Buddha-skill ~/Buddha-skill
-cd ~/Buddha-skill && pip install -r requirements.txt
+git clone https://github.com/xr843/Master-skill ~/Master-skill
+cd ~/Master-skill && pip install -r requirements.txt
 # Register skills (symlink to ~/.claude/skills/)
 for d in prebuilt/*/; do ln -sf "$(pwd)/$d" ~/.claude/skills/"$(basename $d)"; done
 ln -sf "$(pwd)" ~/.claude/skills/create-master
@@ -39,15 +39,15 @@ ln -sf "$(pwd)" ~/.claude/skills/create-master
 **OpenClaw**
 
 ```bash
-git clone https://github.com/xr843/Buddha-skill ~/.openclaw/workspace/skills/create-master
+git clone https://github.com/xr843/Master-skill ~/.openclaw/workspace/skills/create-master
 cd ~/.openclaw/workspace/skills/create-master && pip install -r requirements.txt
 ```
 
 **Manual**
 
 ```bash
-git clone https://github.com/xr843/Buddha-skill
-cd Buddha-skill && pip install -r requirements.txt
+git clone https://github.com/xr843/Master-skill
+cd Master-skill && pip install -r requirements.txt
 ```
 
 ### Use a Pre-built Master
@@ -178,7 +178,7 @@ SKILL.md (AgentSkills entry point)
 
 [FoJin](https://fojin.app) is a Buddhist text aggregation platform integrating 503 data sources, 10K+ texts, 678K+ semantic vector embeddings, and a knowledge graph of 31K entities. It covers major corpora including CBETA Chinese Buddhist Canon, SuttaCentral Pali Canon and translations, and 84000 Tibetan Buddhist translations.
 
-Buddha-skill connects to the FoJin API via `tools/fojin_bridge.py` to enable:
+Master-skill connects to the FoJin API via `tools/fojin_bridge.py` to enable:
 
 - Knowledge graph entity retrieval (master biography, lineage, school)
 - Semantic similarity search (doctrinally relevant sutras)

@@ -14,7 +14,7 @@ allowed-tools:
   - WebFetch
 ---
 
-# Buddha-skill — 佛教法师教学角色生成器
+# Master-skill — 佛教法师教学角色生成器
 
 本内容依据历史佛教文献生成，仅供参考学习。如需正式修行指导，请亲近善知识。
 

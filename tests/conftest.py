@@ -1,4 +1,4 @@
-"""Shared pytest fixtures for Buddha-skill tests."""
+"""Shared pytest fixtures for Master-skill tests."""
 
 import sys
 import os

@@ -18,8 +18,8 @@ SKILL_FILE="$(readlink -f "${CLAUDE_SKILL_DIR}/SKILL.md" 2>/dev/null)"
 PROJECT_ROOT="$(dirname "$(dirname "$(dirname "$SKILL_FILE")")")"
 
 # 降级方案（按顺序尝试）：
-# 1. $HOME/projects/buddha-skill       （开发环境）
-# 2. $HOME/Buddha-skill                 （手动 clone）
+# 1. $HOME/projects/master-skill       （开发环境）
+# 2. $HOME/Master-skill                 （手动 clone）
 # 3. $HOME/.openclaw/workspace/skills/create-master  （OpenClaw）
 ```
 
@@ -109,8 +109,8 @@ PROJECT_ROOT="$(dirname "$(dirname "$(dirname "$SKILL_FILE")")")"
    fi
 
    # 方法 B：已知的开发路径
-   [ -z "$PROJECT_ROOT" ] && PROJECT_ROOT="$HOME/projects/buddha-skill"
-   [ ! -f "$PROJECT_ROOT/tools/rag_query.py" ] && PROJECT_ROOT="$HOME/Buddha-skill"
+   [ -z "$PROJECT_ROOT" ] && PROJECT_ROOT="$HOME/projects/master-skill"
+   [ ! -f "$PROJECT_ROOT/tools/rag_query.py" ] && PROJECT_ROOT="$HOME/Master-skill"
 
    # 方法 C：OpenClaw 默认路径
    [ ! -f "$PROJECT_ROOT/tools/rag_query.py" ] && PROJECT_ROOT="$HOME/.openclaw/workspace/skills/create-master"

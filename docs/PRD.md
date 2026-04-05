@@ -1,8 +1,8 @@
-# Buddha-skill — 产品需求文档 (PRD)
+# Master-skill — 产品需求文档 (PRD)
 
 **版本**：1.0.0  
 **日期**：2026-04-04  
-**项目**：Buddha-skill  
+**项目**：Master-skill  
 **平台**：AgentSkills + FoJin (fojin.app)
 
 ---
@@ -11,13 +11,13 @@
 
 ### 1.1 灵感来源
 
-Buddha-skill 源于 colleague-skill 的设计理念。colleague-skill 通过蒸馏真实同事的沟通风格、工作方式与思维框架，生成可交互的 AI 角色。Buddha-skill 将这一模式迁移至佛教领域：将历史上有据可查的高僧大德的教义体系与说法风格提炼为结构化的 AI 教学角色。
+Master-skill 源于 colleague-skill 的设计理念。colleague-skill 通过蒸馏真实同事的沟通风格、工作方式与思维框架，生成可交互的 AI 角色。Master-skill 将这一模式迁移至佛教领域：将历史上有据可查的高僧大德的教义体系与说法风格提炼为结构化的 AI 教学角色。
 
-两者的核心机制相同——通过 teaching.md（知识体系）与 voice.md（表达风格）的双文件架构，将一个复杂的"人"转化为可靠且可复现的 AI 角色。差异在于数据来源：colleague-skill 依赖私有企业材料，Buddha-skill 依赖公开佛教文献，并通过 FoJin 平台进行结构化访问。
+两者的核心机制相同——通过 teaching.md（知识体系）与 voice.md（表达风格）的双文件架构，将一个复杂的"人"转化为可靠且可复现的 AI 角色。差异在于数据来源：colleague-skill 依赖私有企业材料，Master-skill 依赖公开佛教文献，并通过 FoJin 平台进行结构化访问。
 
 ### 1.2 核心价值
 
-用户与传统文字材料的交互是单向的。Buddha-skill 让用户能以特定法师的视角和方式学习佛法——不仅是阅读法师的文字，而是以该法师的教学逻辑与表达习惯进行对话式学习。
+用户与传统文字材料的交互是单向的。Master-skill 让用户能以特定法师的视角和方式学习佛法——不仅是阅读法师的文字，而是以该法师的教学逻辑与表达习惯进行对话式学习。
 
 具体价值体现：
 
@@ -99,7 +99,7 @@ intake（信息录入）
 
 ### 3.1 FoJin 平台
 
-Buddha-skill 的数据层由 FoJin (fojin.app) 提供支撑。FoJin 是一个专注于佛教典籍的学术数字人文平台，现有数据规模：
+Master-skill 的数据层由 FoJin (fojin.app) 提供支撑。FoJin 是一个专注于佛教典籍的学术数字人文平台，现有数据规模：
 
 | 数据类型 | 数量 |
 |---------|-----|
@@ -125,7 +125,7 @@ Buddha-skill 的数据层由 FoJin (fojin.app) 提供支撑。FoJin 是一个专
 
 ## 4. 传承标签体系
 
-传承标签是 Buddha-skill 区分各法师角色行为差异的核心机制，类似 colleague-skill 中的企业文化标签。每个标签对应一组具体的行为规则，影响 voice.md 的 Layer 1-3 内容。
+传承标签是 Master-skill 区分各法师角色行为差异的核心机制，类似 colleague-skill 中的企业文化标签。每个标签对应一组具体的行为规则，影响 voice.md 的 Layer 1-3 内容。
 
 ### 4.1 汉传核心宗派
 
@@ -403,4 +403,4 @@ teachers/{slug}/
 
 ---
 
-*本文件为 Buddha-skill 项目的产品需求文档，描述项目的设计意图、技术规范与发展方向。如有变更，以最新版本为准。*
+*本文件为 Master-skill 项目的产品需求文档，描述项目的设计意图、技术规范与发展方向。如有变更，以最新版本为准。*

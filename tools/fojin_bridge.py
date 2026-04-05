@@ -1,5 +1,5 @@
 """
-FoJin Data Bridge — connects Buddha-skill to FoJin's Buddhist text platform.
+FoJin Data Bridge — connects Master-skill to FoJin's Buddhist text platform.
 
 Two modes:
 - API mode (default): calls fojin.app REST API, works for any user
