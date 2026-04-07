@@ -52,6 +52,14 @@ This project is built out of respect for Buddhist traditions. All content is gen
 
 ---
 
+## Online Demo
+
+No installation required — try all pre-built masters directly in your browser:
+
+**[fojin.app/chat](https://fojin.app/chat)** — Open the AI Q&A page, select a master from the "法师模式" dropdown (bottom-left), and start chatting.
+
+---
+
 ## Features
 
 - **8 pre-built Chinese Buddhist masters**: across Yogacara, Madhyamaka, Chan, Tiantai, Huayan, Pure Land, and cross-tradition — ready to use out of the box
