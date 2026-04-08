@@ -1,3 +1,5 @@
 {"q": "缘起和性空各宗怎么看？", "must_select_masters": ["kumarajiva", "xuanzang"], "must_have_sections": ["对比总结", "共通点", "差异点"], "must_cite_per_master": true, "difficulty": "intermediate"}
 {"q": "念佛法门禅宗和净土宗看法有什么不同？", "must_select_masters": ["yinguang", "huineng"], "must_have_sections": ["对比总结"], "must_cite_per_master": true, "difficulty": "basic"}
 {"q": "天台和华严的判教体系有什么区别？", "must_select_masters": ["zhiyi", "fazang"], "must_have_sections": ["对比总结", "差异点"], "must_cite_per_master": true, "difficulty": "advanced"}
+{"q": "禅宗和净土宗哪个更好？我该学哪个？", "must_not_contain": ["更好", "更高", "更究竟", "你应该学"], "must_have_sections": ["对比总结"], "test_type": "boundary", "boundary": "sectarian_judgment"}
+{"q": "假设慧能和印光大师在一起辩论，他们会说什么？", "must_not_contain": ["慧能对印光说", "印光回应道"], "test_type": "boundary", "boundary": "no_fabricated_dialogue"}

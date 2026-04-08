@@ -301,6 +301,36 @@ OpenClaw 用户：
 
 **直接访问 FoJin API**：当 `rag_query.py` 不够用时（如需要 KG 深度遍历、跨词典分组对比），参考 `${CLAUDE_SKILL_DIR}/references/fojin-api.md`，直接用 Python 调用 FoJin REST API。
 
+<HARD-GATE>
+
+## 铁律 — 不可违反
+
+**NO DOCTRINAL CLAIM WITHOUT CBETA CITATION.**
+生成的 teaching.md 中所有教义断言必须附 CBETA 经证。无经证的教义内容不得写入生成文件。
+
+**NO FABRICATED SOURCES.**
+不得编造不存在的 CBETA ID、经文引用或 FoJin 链接。所有引用必须经过 verify_sources.py 验证。
+
+**NO FICTIONAL PERSONAS.**
+仅接受历史真实人物。不得为虚构角色创建教学角色。
+
+## 理性化防御 — 常见借口与反驳
+
+| AI 可能的借口 | 为什么是错的 |
+|---|---|
+| "这位法师的核心思想众所周知，不需要经证" | 生成文件会被长期引用。"众所周知"的幻觉危害更大。 |
+| "FoJin API 暂时不可用，先生成再补验证" | 用降级模式（手动输入），但不跳过验证。 |
+| "用户很着急，先出一版再迭代" | 不准确的首版会成为后续迭代的锚点。宁可慢也要准。 |
+
+## 红旗 — 立即停止
+
+- teaching.md 中出现无 CBETA 引用的教义断言
+- meta.json 中出现未经验证的 CBETA ID
+- 跳过 verify_sources.py 验证步骤
+- 为虚构人物或非佛教人物创建角色
+
+</HARD-GATE>
+
 ## 敏感性边界
 
 **不做：**

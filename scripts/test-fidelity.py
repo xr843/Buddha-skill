@@ -65,10 +65,11 @@ def load_tests(master_dir: Path) -> list[dict]:
     return tests
 
 
-def check_response(response: str, test_case: dict) -> dict:
-    """Check a response against expected citations and mentions.
+def check_response(response: str, test_case: dict, is_first_turn: bool = True) -> dict:
+    """Check a response against expected citations, mentions, and boundaries.
 
-    Returns {passed: bool, missing_cites: [...], missing_mentions: [...]}.
+    Returns {passed: bool, missing_cites: [...], missing_mentions: [...],
+             forbidden_found: [...], boundary_violations: [...]}.
     """
     missing_cites = []
     for cite in test_case.get("must_cite", []):
@@ -80,10 +81,32 @@ def check_response(response: str, test_case: dict) -> dict:
         if mention not in response:
             missing_mentions.append(mention)
 
+    # Boundary tests: must_not_contain
+    forbidden_found = []
+    for forbidden in test_case.get("must_not_contain", []):
+        if forbidden in response:
+            forbidden_found.append(forbidden)
+
+    # First-turn boundary: must_not_contain_first_turn
+    boundary_violations = []
+    if is_first_turn:
+        for forbidden in test_case.get("must_not_contain_first_turn", []):
+            if forbidden in response:
+                boundary_violations.append(forbidden)
+
+    passed = (
+        len(missing_cites) == 0
+        and len(missing_mentions) == 0
+        and len(forbidden_found) == 0
+        and len(boundary_violations) == 0
+    )
+
     return {
-        "passed": len(missing_cites) == 0 and len(missing_mentions) == 0,
+        "passed": passed,
         "missing_cites": missing_cites,
         "missing_mentions": missing_mentions,
+        "forbidden_found": forbidden_found,
+        "boundary_violations": boundary_violations,
     }
 
 
@@ -151,25 +174,31 @@ def run_tests(master_name: str, dry_run: bool = False, model: str = "claude-sonn
             print("API ERROR")
             continue
 
-        check = check_response(response_text, test)
+        check = check_response(response_text, test, is_first_turn=True)
         status = "PASS" if check["passed"] else "FAIL"
 
-        results.append({
+        result_entry = {
             "index": i,
             "question": test["q"],
             "difficulty": test.get("difficulty", "unknown"),
+            "test_type": test.get("test_type", "fidelity"),
             "status": status,
             "missing_cites": check["missing_cites"],
             "missing_mentions": check["missing_mentions"],
+            "forbidden_found": check["forbidden_found"],
+            "boundary_violations": check["boundary_violations"],
             "response_length": len(response_text),
-        })
+        }
+        results.append(result_entry)
 
         if check["passed"]:
             passed += 1
             print("PASS")
         else:
             failed += 1
-            print(f"FAIL (missing: {check['missing_cites'] + check['missing_mentions']})")
+            failures = (check["missing_cites"] + check["missing_mentions"]
+                        + check["forbidden_found"] + check["boundary_violations"])
+            print(f"FAIL ({failures})")
 
     return {
         "master": master_name,
