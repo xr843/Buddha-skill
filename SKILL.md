@@ -150,6 +150,42 @@ python3 ${CLAUDE_SKILL_DIR}/tools/verify_sources.py --check-links collected_data
 - Layer 2：辅助风格（次要但常见的表达模式）
 - Layer 3：情境风格（特定场景下的应对方式）
 
+### Step 3.5：二阶段审查
+
+生成完成后，**必须**经过两阶段独立审查才能进入预览。审查顺序不可颠倒（教义准确性 → 风格一致性），因为教义错误修复可能影响风格。
+
+**第一阶段：教义准确性审查**
+
+加载 `${CLAUDE_SKILL_DIR}/prompts/doctrine_reviewer.md`，对生成的 teaching.md 执行审查：
+- 验证经证覆盖率（目标 ≥ 90%）
+- 检查 CBETA ID 归属准确性
+- 检测宗派边界越界
+- 输出审查报告（PASS / PASS WITH WARNINGS / FAIL）
+
+若 FAIL → 自动修复严重问题后重新审查，最多 2 轮。2 轮仍 FAIL → 向用户报告问题，请求人工介入。
+
+**第二阶段：风格一致性审查**
+
+加载 `${CLAUDE_SKILL_DIR}/prompts/voice_reviewer.md`，对生成的 voice.md 执行审查：
+- 验证 Layer 0 硬规则完整性
+- 检查风格与宗派特征匹配度
+- 验证层次结构清晰度
+- 输出审查报告（PASS / PASS WITH WARNINGS / FAIL）
+
+若 FAIL → 自动修复后重新审查。
+
+**审查结果展示**：
+
+```
+══ 审查结果 ══
+教义准确性：PASS (经证覆盖率 95%, 0 严重问题)
+风格一致性：PASS WITH WARNINGS (Layer 0 完整, 1 警告)
+  警告：Layer 2 缺少"面对学者"的情境风格
+══════════════
+```
+
+两项均 PASS 或 PASS WITH WARNINGS 后，进入 Step 4。
+
 ### Step 4：预览与确认
 
 展示生成的 teaching.md 和 voice.md 预览，请用户确认。
@@ -298,6 +334,8 @@ OpenClaw 用户：
 | 文件写入 | `${CLAUDE_SKILL_DIR}/tools/skill_writer.py` |
 | 版本管理 | `${CLAUDE_SKILL_DIR}/tools/version_manager.py` |
 | 来源验证 | `${CLAUDE_SKILL_DIR}/tools/verify_sources.py` |
+| 教义审查 | `${CLAUDE_SKILL_DIR}/prompts/doctrine_reviewer.md` |
+| 风格审查 | `${CLAUDE_SKILL_DIR}/prompts/voice_reviewer.md` |
 
 **直接访问 FoJin API**：当 `rag_query.py` 不够用时（如需要 KG 深度遍历、跨词典分组对比），参考 `${CLAUDE_SKILL_DIR}/references/fojin-api.md`，直接用 Python 调用 FoJin REST API。
 
