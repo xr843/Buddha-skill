@@ -45,7 +45,7 @@ jobs:
 
             await github.rest.issues.create({
               owner: context.repo.owner,
-              repo: context.repo.name,
+              repo: context.repo.repo,
               title: `[Weekly] FoJin links need update — ${updates} URLs, ${failed} missing`,
               body: `Automated weekly link verification found changes.\n\n` +
                     `- **URL replacements needed:** ${updates}\n` +
