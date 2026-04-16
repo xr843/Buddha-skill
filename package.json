@@ -2,12 +2,69 @@
   "name": "master-skill",
   "version": "0.3.0",
   "type": "module",
-  "description": "Chinese Buddhist Master AI Skills — RAG-grounded, source-cited, fidelity-tested",
+  "description": "Chinese Buddhist Master AI Skills — RAG-grounded, source-cited, fidelity-tested. 8 pre-built 汉传 patriarchs: Xuanzang, Kumārajīva, Huineng, Zhiyi, Fazang, Yinguang, Ouyi, Xuyun.",
   "bin": {
     "master-skill": "./bin/cli.mjs"
   },
-  "keywords": ["claude-skills", "agent-skills", "buddhism", "ai-persona", "rag", "digital-humanities"],
+  "scripts": {
+    "list": "node bin/cli.mjs list",
+    "validate": "python scripts/validate.py --strict",
+    "validate:fidelity": "python scripts/validate-fidelity.py",
+    "test": "python scripts/validate.py --strict && python scripts/validate-fidelity.py && python scripts/test-fidelity.py --all --dry-run",
+    "test:smoke": "python scripts/test-fidelity.py --master yinguang --max-tests 1",
+    "prepack": "node bin/cli.mjs list"
+  },
+  "keywords": [
+    "claude-skills",
+    "agent-skills",
+    "claude-code",
+    "cursor",
+    "codex",
+    "opencode",
+    "gemini-cli",
+    "buddhism",
+    "chinese-buddhism",
+    "ai-persona",
+    "rag",
+    "digital-humanities",
+    "cbeta",
+    "fojin"
+  ],
+  "author": {
+    "name": "xr843",
+    "url": "https://github.com/xr843"
+  },
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/xr843/Master-skill"},
-  "files": ["bin/", "prebuilt/", "scripts/", "hooks/", ".claude-plugin/", ".cursor-plugin/", ".codex/", ".opencode/"]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xr843/Master-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xr843/Master-skill/issues"
+  },
+  "homepage": "https://fojin.app/chat",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "bin/",
+    "prebuilt/",
+    "scripts/",
+    "hooks/",
+    ".claude-plugin/",
+    ".cursor-plugin/",
+    ".codex/",
+    ".opencode/",
+    "gemini-extension.json",
+    "GEMINI.md",
+    "SKILL.md",
+    "ETHICS.md",
+    "LICENSE",
+    "README.md",
+    "README_EN.md"
+  ]
 }

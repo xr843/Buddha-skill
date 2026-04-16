@@ -361,11 +361,22 @@ Master-skill 通过 `tools/fojin_bridge.py` 接入 FoJin API，实现：
 
 ## 贡献指南
 
-欢迎提交新的预置法师、修正文献来源错误、补充经文片段，或改进工具链。
+**完整流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。** 以下是速查：
 
-新增祖师需遵循 v0.3 架构：`prebuilt/<name>/` 下包含 SKILL.md（含 provenance frontmatter 与决策树）、`references/teaching.md` 与 `references/voice.md`（按需加载）、`sources/*.md`（离线经文片段）、`tests/fidelity.jsonl`（5 条以上 Q&A 保真度样例）。提交前运行 `python3 scripts/validate.py --strict` 确保 0 errors，并让 CI 的保真度 dry-run 通过。
+- 🐞 **报 bug**：[Bug Report](https://github.com/xr843/Master-skill/issues/new?template=bug_report.yml)
+- ✨ **提 feature**：[Feature Request](https://github.com/xr843/Master-skill/issues/new?template=feature_request.yml)
+- 🧘 **建议新法师**：**先开 [New Master 提议](https://github.com/xr843/Master-skill/issues/new?template=new_master.yml) 征询**，不要直接写完 PR 再被拒（版权 Tier / 教界边界 / 史料可得性 三重审查）
+- 🚨 **教界越界报告**：[Boundary Violation (P0)](https://github.com/xr843/Master-skill/issues/new?template=boundary_violation.yml)
+- 💬 **一般讨论 / 提问**：[GitHub Discussions](https://github.com/xr843/Master-skill/discussions)
 
-提交前请确认：文献来源可追溯至 CBETA，内容忠实于佛教经典文献，无宗派偏见。
+**新增一位法师的必读：**
+
+1. [ETHICS.md](ETHICS.md) §2 — 确认版权 Tier（A 可直接 PR，B 需授权证明，C 一律拒绝）
+2. [ETHICS.md](ETHICS.md) §3 — 教界禁止行为须写入该法师 `voice.md` Layer 0
+3. [CONTRIBUTING.md](CONTRIBUTING.md) §3 — 目录结构、frontmatter、fidelity 测试用例编写规范
+4. 提交前：`python scripts/validate.py --strict` 绿色 + `tests/fidelity.jsonl` 至少 5 条 + CI fidelity-smoke 通过
+
+其它一般贡献（文档、工具链、CI）走普通 PR 流程。
 
 ---
 

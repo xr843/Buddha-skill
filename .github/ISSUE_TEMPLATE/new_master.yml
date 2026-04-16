@@ -1,0 +1,115 @@
+name: 🧘 新法师提议
+description: 提议收录一位新的祖师大德（⚠️ 提 PR 前请先开此 issue 征询，避免已完成工作被拒）
+title: "[New Master] "
+labels: ["new-master", "needs-tier-check"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ 重要：提 PR 前必须先开此 issue
+
+        贡献一位新法师涉及**版权判定、教界边界、史料可得性**三层审查。已完成 `prebuilt/` 目录再被拒的成本很高，因此请先在这里征询意见。
+
+        **必读**：[`ETHICS.md`](https://github.com/xr843/Master-skill/blob/main/ETHICS.md) §2（版权 Tier）、§3（教界边界），以及 [`CONTRIBUTING.md`](https://github.com/xr843/Master-skill/blob/main/CONTRIBUTING.md) §3。
+
+  - type: input
+    id: master-name
+    attributes:
+      label: 法师名称
+      placeholder: "例如：马祖道一 / 临济义玄 / 弘一大师"
+    validations:
+      required: true
+
+  - type: input
+    id: slug
+    attributes:
+      label: 建议 slug（小写英文或拼音）
+      placeholder: "例如：mazu / linji / hongyi"
+    validations:
+      required: true
+
+  - type: input
+    id: dates
+    attributes:
+      label: 生卒年
+      placeholder: "例如：709-788 / 1880-1942"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: lineage
+    attributes:
+      label: 主要宗派 / 传承
+      options:
+        - 禅宗
+        - 净土宗
+        - 天台宗
+        - 华严宗
+        - 法相唯识宗
+        - 三论宗（中观）
+        - 律宗
+        - 密宗 / 真言宗
+        - 跨宗派融合
+        - 其它
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tier
+    attributes:
+      label: 版权 Tier 自评（参考 ETHICS.md §2）
+      options:
+        - "Tier A — 公有领域（圆寂 > 50 年，中国大陆 / 台湾）"
+        - "Tier A — 公有领域（圆寂 > 70 年，大多数其它辖区）"
+        - "Tier B — 仍在版权期（需附授权证明）"
+        - "Tier D — 灰色，需讨论"
+        - "不确定"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tier-justification
+    attributes:
+      label: Tier 判定理由
+      description: 引用具体的圆寂年份、授权文件、学界共识等。Tier B 必须附授权证明链接。
+      placeholder: "例如：印光大师圆寂 1940 年，距今 85 年；中国大陆著作权保护期 50 年，已于 1990 年过期。文钞 CBETA X62n1182, X62n1183 已收录公有学术版本。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: 主要 CBETA / FoJin 数据源
+      description: 至少 3 部代表性经论或文集的 CBETA ID + 可选 FoJin text_id
+      placeholder: |
+        - 《六祖坛经》T48n2008
+        - 《景德传灯录》T51n2076 慧能章
+        - FoJin text_id: 待查
+    validations:
+      required: true
+
+  - type: textarea
+    id: why-now
+    attributes:
+      label: 为什么收录这位法师？
+      description: 从用户需求 / 宗派覆盖 / 对比价值 / 数据可得性角度说明
+      placeholder: "例如：当前 8 位覆盖唯识/中观/禅/天台/华严/净土/跨宗派，但禅宗各家（马祖/临济/赵州）未单独立传。马祖作为洪州宗代表，与慧能的南宗直指、虚云的近代参禅形成三代对比，/compare-masters 价值显著。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: ethical-concerns
+    attributes:
+      label: 可能的教界边界 / 学界争议
+      description: 有无学派争议、身份考证分歧、特定地区的敏感性？
+      placeholder: "例如：《坛经》版本差异（敦煌本 vs 宗宝本），现当代学界倾向敦煌本为近祖；神会造论说需要说明但不过度卷入。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: volunteer
+    attributes:
+      label: 是否愿意亲自贡献 PR？
+      placeholder: "是 / 否。如是，预计何时可提？"
+    validations:
+      required: true

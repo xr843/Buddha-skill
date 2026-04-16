@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions — 一般讨论 / 提问 / 分享
+    url: https://github.com/xr843/Master-skill/discussions
+    about: 不是 bug 也不是 feature request？先来讨论区聊聊。
+  - name: 🌐 浏览器体验（fojin.app/chat）
+    url: https://fojin.app/chat
+    about: 想先体验再决定要不要贡献？点左下角「法师模式」。
+  - name: 🔒 安全漏洞（请勿走 public issue）
+    url: https://github.com/xr843/Master-skill/security/advisories/new
+    about: 发现 prompt injection、supply chain、secret leak 等安全问题？走 Security Advisory。
+  - name: 📜 伦理 / 版权申诉（紧急）
+    url: mailto:xianren843@protonmail.com?subject=%5BURGENT%20TAKEDOWN%5D
+    about: 权利人要求下架内容 / 教界边界严重违规 / 需要紧急处理 → 48 小时回复。

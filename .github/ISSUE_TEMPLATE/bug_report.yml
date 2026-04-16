@@ -1,0 +1,94 @@
+name: 🐞 Bug Report
+description: 报告技术问题（CI 失败、脚本崩溃、installer 报错、错误引经、法师回答偏离预期等）
+title: "[Bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **先确认：**
+        - [ ] 已看过 [README](https://github.com/xr843/Master-skill#readme) 与 [CONTRIBUTING.md](https://github.com/xr843/Master-skill/blob/main/CONTRIBUTING.md)
+        - [ ] 已搜索现有 [issues](https://github.com/xr843/Master-skill/issues?q=is%3Aissue) 无重复
+        - [ ] 如果是**教界边界问题**（AI 给你传戒 / 印证开悟 / 灵媒化回答），请改用 [Boundary Violation 模板](./new?template=boundary_violation.yml)
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options:
+        - CI / Workflow
+        - scripts/ (validate / fidelity / cite / query)
+        - bin/cli.mjs (NPX installer)
+        - tools/ (fojin_bridge / verify_sources / cross_reference)
+        - prebuilt/<master> 回答质量
+        - prebuilt/<master> 引经错误
+        - /create-master 生成管线
+        - /compare-masters 对比
+        - hooks (Claude Code / Cursor / Codex / OpenCode / Gemini)
+        - 文档 / README
+        - 其它
+    validations:
+      required: true
+
+  - type: input
+    id: master
+    attributes:
+      label: 涉及法师（如有）
+      placeholder: yinguang / xuanzang / ... 或 N/A
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么
+      description: 简要描述问题现象
+      placeholder: "例如「跑 `python scripts/validate.py --strict` 报 KeyError: 'sources'」"
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+      description: 最小复现。越可复现越快修。
+      placeholder: |
+        1. `git clone https://github.com/xr843/Master-skill`
+        2. `pip install -r requirements.txt`
+        3. `python scripts/test-fidelity.py --master huineng --max-tests 1`
+        4. 看到 ...
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志 / 堆栈
+      description: 粘贴完整 traceback 或相关 log。**请删除 API key！**
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: platform
+    attributes:
+      label: 运行环境
+      placeholder: "macOS 14.4 / Python 3.11 / Node 20 / Claude Code 1.0.x"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Master-skill 版本或 commit SHA
+      placeholder: "v0.3.0 / main@abc1234"
+    validations:
+      required: true

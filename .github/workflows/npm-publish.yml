@@ -1,0 +1,70 @@
+name: Publish to npm
+
+# Triggered on release tags (v0.3.0, v0.3.1, v1.0.0, ...) or manually.
+# First-time publish requires: Settings → Secrets → Actions → NPM_TOKEN
+# Generate at https://www.npmjs.com/settings/~/tokens (type: Automation / Granular).
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Run npm publish --dry-run only"
+        required: false
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+
+permissions:
+  contents: read
+  # id-token needed if we move to npm provenance / trusted publishing later
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/master-skill
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Verify CLI is executable
+        run: |
+          test -x bin/cli.mjs || chmod +x bin/cli.mjs
+          node bin/cli.mjs list
+
+      - name: Verify package contents (what will ship)
+        run: npm pack --dry-run
+
+      - name: Verify version matches tag
+        if: github.event_name == 'release'
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG="${GITHUB_REF_NAME#v}"
+          if [ "$PKG_VERSION" != "$TAG" ]; then
+            echo "::error::package.json version ($PKG_VERSION) != release tag ($TAG)"
+            exit 1
+          fi
+
+      - name: Publish (dry-run)
+        if: github.event_name == 'workflow_dispatch' && inputs.dry-run == 'true'
+        run: npm publish --dry-run --access public
+
+      - name: Publish
+        if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.dry-run == 'false')
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "::error::NPM_TOKEN secret not configured. Add it at Settings → Secrets → Actions."
+            exit 1
+          fi
+          npm publish --access public --provenance

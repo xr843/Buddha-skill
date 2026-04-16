@@ -1,0 +1,60 @@
+name: ✨ Feature Request
+description: 提议新功能、改进、工具链增强（非法师内容类）
+title: "[Feature] "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **先确认：**
+        - [ ] 这不是「增加一位新法师」请求（请改用 [New Master 模板](./new?template=new_master.yml)）
+        - [ ] 已搜索现有 [issues](https://github.com/xr843/Master-skill/issues?q=is%3Aissue) 与 [discussions](https://github.com/xr843/Master-skill/discussions) 无重复
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options:
+        - CI / 测试工具
+        - scripts / tools
+        - bin/cli.mjs (NPX installer)
+        - hooks (Claude Code / Cursor / Codex / OpenCode / Gemini)
+        - 新平台支持（cline / aider / openhands / ...）
+        - 文档 / 翻译
+        - /compare-masters
+        - /create-master 生成管线
+        - 其它
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的问题
+      description: 你遇到的什么场景让你需要这个功能？
+      placeholder: "例如：在 Gemini CLI 环境里调用 /yinguang 时 hooks 没有触发，session-start 注入失败..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 你认为可以怎么做？可以是粗略想法。
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 考虑过的替代方案
+    validations:
+      required: false
+
+  - type: textarea
+    id: volunteer
+    attributes:
+      label: 是否愿意贡献 PR？
+      description: 可选。如果你愿意动手，维护者会优先 review。
+    validations:
+      required: false

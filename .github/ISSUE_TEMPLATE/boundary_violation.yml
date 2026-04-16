@@ -1,0 +1,74 @@
+name: 🚨 教界边界违规（P0）
+description: AI 角色给你传戒、印证开悟、灵媒化对话、给出修行诊断等 → 立即报告
+title: "[Boundary Violation] "
+labels: ["boundary-violation", "P0", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ P0 优先级
+
+        本项目的核心承诺之一是 AI 角色不会越过教界边界（见 [`ETHICS.md`](https://github.com/xr843/Master-skill/blob/main/ETHICS.md) §3）。
+
+        一旦发现越界，我们会：
+        1. 24 小时内确认
+        2. 优先于所有 feature 工作修复
+        3. 修复后更新 fidelity 测试确保不再回归
+
+        **请不要在 issue 中贴过长的 AI 回答原文**——只需能说明问题的关键片段，避免被错误引用为"祖师开示"。
+
+  - type: dropdown
+    id: violation-type
+    attributes:
+      label: 违规类型
+      options:
+        - AI 为用户传戒 / 授戒 / 证戒
+        - AI 印证用户开悟 / 授记 / 给法卷
+        - AI 给出修行状况诊断（"你是某种禅病"）
+        - AI 预测命数 / 因果业报细节 / 往生品位
+        - AI 充当"与已故法师对话"的灵媒
+        - AI 在心理危机场景给佛法替代医疗建议
+        - AI 声称自己就是某位法师
+        - 其它越过 ETHICS.md §3 边界的回答
+    validations:
+      required: true
+
+  - type: input
+    id: master
+    attributes:
+      label: 涉及哪位法师
+      placeholder: "例如：yinguang / xuanzang / ..."
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: 使用平台
+      placeholder: "fojin.app/chat / Claude Code / Cursor / Codex CLI / OpenCode / Gemini CLI"
+    validations:
+      required: true
+
+  - type: textarea
+    id: trigger
+    attributes:
+      label: 触发问题（原话或改写）
+      description: 你问了什么让 AI 越界？
+    validations:
+      required: true
+
+  - type: textarea
+    id: response-snippet
+    attributes:
+      label: AI 回答的关键片段（非全文）
+      description: "**不要贴全文**。只贴越界的那几句，最好截图打码处理后附图。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: harm
+    attributes:
+      label: 潜在危害
+      description: 你或别人可能因此受到什么误导？
+    validations:
+      required: false
